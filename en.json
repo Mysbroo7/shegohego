@@ -1,0 +1,90 @@
+{
+  "app_name": "Shego and Hego",
+  "welcome": "Welcome",
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "forgot_password": "Forgot Password?",
+    "sign_up": "Create New Account",
+    "sign_in": "Sign In",
+    "sign_out": "Sign Out",
+    "google_login": "Sign in with Google",
+    "apple_login": "Sign in with Apple",
+    "terms_agree": "I agree to Terms and Conditions",
+    "privacy_policy": "Privacy Policy"
+  },
+  "home": {
+    "title": "Home",
+    "explore": "Explore",
+    "trending": "Trending",
+    "following": "Following"
+  },
+  "video": {
+    "upload": "Upload Video",
+    "record": "Record Video",
+    "edit": "Edit",
+    "publish": "Publish",
+    "description": "Description",
+    "hashtags": "Hashtags",
+    "privacy": "Privacy",
+    "public": "Public",
+    "private": "Private",
+    "draft": "Draft",
+    "views": "Views",
+    "likes": "Likes",
+    "comments": "Comments",
+    "shares": "Shares",
+    "save": "Save"
+  },
+  "profile": {
+    "title": "Profile",
+    "edit": "Edit Profile",
+    "followers": "Followers",
+    "following": "Following",
+    "videos": "Videos",
+    "likes": "Likes",
+    "bio": "Bio",
+    "username": "Username",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "message": "Message",
+    "share": "Share"
+  },
+  "messages": {
+    "title": "Messages",
+    "new_message": "New Message",
+    "type_message": "Type a message...",
+    "send": "Send",
+    "no_messages": "No messages"
+  },
+  "settings": {
+    "title": "Settings",
+    "account": "Account",
+    "privacy": "Privacy",
+    "notifications": "Notifications",
+    "language": "Language",
+    "currency": "Currency",
+    "dark_mode": "Dark Mode",
+    "about": "About App",
+    "help": "Help",
+    "logout": "Logout"
+  },
+  "errors": {
+    "invalid_email": "Invalid email address",
+    "password_too_short": "Password is too short",
+    "passwords_not_match": "Passwords do not match",
+    "user_exists": "User already exists",
+    "invalid_credentials": "Invalid credentials",
+    "network_error": "Network error",
+    "server_error": "Server error"
+  },
+  "success": {
+    "account_created": "Account created successfully",
+    "video_uploaded": "Video uploaded successfully",
+    "profile_updated": "Profile updated",
+    "message_sent": "Message sent"
+  }
+}
