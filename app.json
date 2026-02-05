@@ -15,7 +15,7 @@
       }
     },
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": false, 
+    "newArchEnabled": false,
     "plugins": [
       "expo-router",
       [
@@ -26,11 +26,19 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.9.25"
+          }
+        }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
-      "reactCompiler": false 
+      "reactCompiler": false
     },
     "extra": {
       "eas": {

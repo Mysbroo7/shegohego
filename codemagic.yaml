@@ -11,22 +11,18 @@ workflows:
         script: npm install --legacy-peer-deps
       - name: Expo Prebuild
         script: npx expo prebuild --platform android --clean
-      - name: Fix Kotlin Version and Build
+      - name: Generate Keystore and Build
         script: |
-          # 1. توليد المفتاح
+          # 1. توليد مفتاح التوقيع
           keytool -genkey -v -keystore shego.keystore -alias shego-key -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=Shego, OU=Dev, O=Shego, L=City, S=State, C=US"
           
-          # 2. إعداد ملف التوقيع
+          # 2. حقن خصائص التوقيع في ملف gradle.properties
           echo "RELEASE_STORE_FILE=../shego.keystore" >> android/gradle.properties
           echo "RELEASE_STORE_PASSWORD=123456" >> android/gradle.properties
           echo "RELEASE_KEY_ALIAS=shego-key" >> android/gradle.properties
           echo "RELEASE_KEY_PASSWORD=123456" >> android/gradle.properties
           
-          # 3. حل جذري لمشكلة Kotlin: البحث في كافة ملفات gradle وتعديل النسخة
-          find android -name "build.gradle" -exec sed -i '' 's/kotlinVersion = .*/kotlinVersion = "1.9.25"/' {} + || find android -name "build.gradle" -exec sed -i 's/kotlinVersion = .*/kotlinVersion = "1.9.25"/' {} +
-          find android -name "build.gradle" -exec sed -i '' 's/kotlin_version = .*/kotlin_version = "1.9.25"/' {} + || find android -name "build.gradle" -exec sed -i 's/kotlin_version = .*/kotlin_version = "1.9.25"/' {} +
-
-          # 4. بناء النسخ
+          # 3. بناء ملفات APK و AAB (التنظيف ثم البناء)
           cd android && ./gradlew clean assembleRelease bundleRelease
     artifacts:
       - android/app/build/outputs/bundle/release/*.aab
