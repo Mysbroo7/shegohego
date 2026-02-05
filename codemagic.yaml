@@ -22,8 +22,9 @@ workflows:
           echo "RELEASE_KEY_ALIAS=shego-key" >> android/gradle.properties
           echo "RELEASE_KEY_PASSWORD=123456" >> android/gradle.properties
           
-          # 3. إجبار إصدار Kotlin على 1.9.25 لحل مشكلة Compose Compiler
-          sed -i '' 's/kotlinVersion = .*/kotlinVersion = "1.9.25"/' android/build.gradle || sed -i 's/kotlinVersion = .*/kotlinVersion = "1.9.25"/' android/build.gradle
+          # 3. حل جذري لمشكلة Kotlin: البحث في كافة ملفات gradle وتعديل النسخة
+          find android -name "build.gradle" -exec sed -i '' 's/kotlinVersion = .*/kotlinVersion = "1.9.25"/' {} + || find android -name "build.gradle" -exec sed -i 's/kotlinVersion = .*/kotlinVersion = "1.9.25"/' {} +
+          find android -name "build.gradle" -exec sed -i '' 's/kotlin_version = .*/kotlin_version = "1.9.25"/' {} + || find android -name "build.gradle" -exec sed -i 's/kotlin_version = .*/kotlin_version = "1.9.25"/' {} +
 
           # 4. بناء النسخ
           cd android && ./gradlew clean assembleRelease bundleRelease
