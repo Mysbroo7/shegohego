@@ -1,6 +1,6 @@
 workflows:
   android-workflow:
-    name: Android AAB Build
+    name: Android AAB & APK Build
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
@@ -13,7 +13,7 @@ workflows:
         script: npx expo prebuild --platform android
       - name: Generate Keystore and Build
         script: |
-          # توليد المفتاح تلقائياً بكلمة مرور 123456
+          # توليد المفتاح تلقائياً
           keytool -genkey -v -keystore shego.keystore -alias shego-key -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=Shego, OU=Dev, O=Shego, L=City, S=State, C=US"
           
           # إعداد ملف التوقيع لـ Gradle
@@ -22,8 +22,9 @@ workflows:
           echo "RELEASE_KEY_ALIAS=shego-key" >> android/gradle.properties
           echo "RELEASE_KEY_PASSWORD=123456" >> android/gradle.properties
           
-          # بدء البناء
-          cd android && ./gradlew bundleRelease
+          # بناء النسختين معاً (AAB و APK)
+          cd android && ./gradlew assembleRelease bundleRelease
     artifacts:
       - android/app/build/outputs/bundle/release/*.aab
+      - android/app/build/outputs/apk/release/*.apk
       - shego.keystore
