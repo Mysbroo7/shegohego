@@ -11,18 +11,21 @@ workflows:
         script: npm install --legacy-peer-deps
       - name: Expo Prebuild
         script: npx expo prebuild --platform android --clean
-      - name: Generate Keystore and Build
+      - name: Fix Kotlin Version and Build
         script: |
-          # 1. توليد المفتاح أولاً
+          # 1. توليد المفتاح
           keytool -genkey -v -keystore shego.keystore -alias shego-key -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=Shego, OU=Dev, O=Shego, L=City, S=State, C=US"
           
-          # 2. إعداد ملف التوقيع لـ Gradle
+          # 2. إعداد ملف التوقيع
           echo "RELEASE_STORE_FILE=../shego.keystore" >> android/gradle.properties
           echo "RELEASE_STORE_PASSWORD=123456" >> android/gradle.properties
           echo "RELEASE_KEY_ALIAS=shego-key" >> android/gradle.properties
           echo "RELEASE_KEY_PASSWORD=123456" >> android/gradle.properties
           
-          # 3. تنظيف وبناء النسختين معاً (AAB و APK)
+          # 3. إجبار إصدار Kotlin على 1.9.25 لحل مشكلة Compose Compiler
+          sed -i '' 's/kotlinVersion = .*/kotlinVersion = "1.9.25"/' android/build.gradle || sed -i 's/kotlinVersion = .*/kotlinVersion = "1.9.25"/' android/build.gradle
+
+          # 4. بناء النسخ
           cd android && ./gradlew clean assembleRelease bundleRelease
     artifacts:
       - android/app/build/outputs/bundle/release/*.aab
