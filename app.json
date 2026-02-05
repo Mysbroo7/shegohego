@@ -8,23 +8,14 @@
     "scheme": "shegoandhego",
     "android": {
       "package": "com.shegoandhego.app",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/icon.png"
-      },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
-    },
-    "ios": {
-      "bundleIdentifier": "com.shegoandhego.app",
-      "supportsTablet": true
+      }
     },
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
+    "newArchEnabled": false, 
     "plugins": [
       "expo-router",
       [
@@ -39,7 +30,7 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "reactCompiler": true
+      "reactCompiler": false 
     },
     "extra": {
       "eas": {
