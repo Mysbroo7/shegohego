@@ -13,17 +13,17 @@ workflows:
         script: npx expo prebuild --platform android --clean
       - name: Generate Keystore and Build
         script: |
-          # توليد المفتاح تلقائياً
+          # 1. توليد المفتاح أولاً
           keytool -genkey -v -keystore shego.keystore -alias shego-key -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=Shego, OU=Dev, O=Shego, L=City, S=State, C=US"
           
-          # إعداد ملف التوقيع لـ Gradle
+          # 2. إعداد ملف التوقيع لـ Gradle
           echo "RELEASE_STORE_FILE=../shego.keystore" >> android/gradle.properties
           echo "RELEASE_STORE_PASSWORD=123456" >> android/gradle.properties
           echo "RELEASE_KEY_ALIAS=shego-key" >> android/gradle.properties
           echo "RELEASE_KEY_PASSWORD=123456" >> android/gradle.properties
           
-          # بناء النسختين معاً (AAB و APK)
-          cd android && ./gradlew assembleRelease bundleRelease
+          # 3. تنظيف وبناء النسختين معاً (AAB و APK)
+          cd android && ./gradlew clean assembleRelease bundleRelease
     artifacts:
       - android/app/build/outputs/bundle/release/*.aab
       - android/app/build/outputs/apk/release/*.apk
