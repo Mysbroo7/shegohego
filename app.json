@@ -6,16 +6,19 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "shegoandhego",
+
     "android": {
       "package": "com.shegoandhego.app",
       "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/icon.png"
+        "foregroundImage": "./assets/images/android-icon-foreground.png"
       }
     },
+
     "userInterfaceStyle": "automatic",
     "newArchEnabled": false,
+
     "plugins": [
       "expo-router",
       [
@@ -36,10 +39,16 @@
         }
       ]
     ],
+
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": false
     },
+
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+
     "extra": {
       "eas": {
         "projectId": "734ee5eb-a908-49b3-88b0-000dbb0f935b"
